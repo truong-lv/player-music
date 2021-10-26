@@ -23,14 +23,15 @@ let app={
         localStorage.setItem(PLAY_STORAGE,JSON.stringify(this.config))
     },  
     loadConfig:function(){
-        root.setAttribute('data-theme', this.config.mode);
+        root.setAttribute('data-theme', this.config.mode!==undefined?this.config.mode:'light');
         this.isRandom=this.config.isRandom;
         $(".btn-random").classList.toggle("active",this.isRandom);
         this.isRepeat=this.config.isRepeat;
         $(".btn-repeat").classList.toggle("active",this.isRepeat);
-        audio.volume=this.config.volume;
-        $(".btn-volume .volume").value=this.config.volume;
-
+        if(this.config.volume!==undefined){
+            audio.volume=this.config.volume;
+            $(".btn-volume .volume").value=this.config.volume;
+        }
     }, 
     songs:[
         {
